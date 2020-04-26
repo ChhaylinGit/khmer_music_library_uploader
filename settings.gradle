@@ -1,0 +1,2 @@
+rootProject.name='khmer_music_library_uploader'
+include ':app'
