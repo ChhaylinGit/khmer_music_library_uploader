@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">មរតកចំរៀងខ្មែរ</string>
+    <string name="tab_add_song">បន្ថែមបទចំរៀង</string>
+    <string name="tab_add_album">បន្ថែមអាល់ប៊ុម</string>
+    <string name="browse_music">ស្វែងរកបទចំរៀង</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
