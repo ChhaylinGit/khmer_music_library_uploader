@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "988327505897-ijv2nkjt9d86uf18fscoh29njjad175g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.khmer_music_library_uploader",
+            "certificate_hash": "a16e76eab377d42217fe7802979aacf65d1bbef6"
+          }
+        },
+        {
           "client_id": "988327505897-t8vbtei1mot097t26tjlm7nnefou4713.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -111,7 +111,6 @@ public class SongUploadFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 songCategory = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getActivity(), songCategory, Toast.LENGTH_SHORT).show();
             }
 
             @Override

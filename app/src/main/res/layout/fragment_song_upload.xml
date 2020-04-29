@@ -31,7 +31,8 @@
                 android:id="@+id/spinnerAlbum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@drawable/spinner">
             </Spinner>
 
             <androidx.cardview.widget.CardView
@@ -44,11 +45,11 @@
                 android:innerRadius="0dp"
                 android:shape="ring"
                 android:layout_gravity="left"
-                app:cardUseCompatPadding="true"
                 android:clickable="true"
                 android:thicknessRatio="1.9"
                 android:layout_centerHorizontal="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_marginTop="10dp">
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -101,6 +102,7 @@
            android:layout_height="wrap_content">
 
        </ListView>
+
        <androidx.cardview.widget.CardView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
