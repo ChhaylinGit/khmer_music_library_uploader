@@ -2,16 +2,18 @@
     <string name="app_name">មរតកចំរៀងខ្មែរ</string>
     <string name="tab_add_song">បន្ថែមបទចំរៀង</string>
     <string name="tab_add_album">បន្ថែមអាល់ប៊ុម</string>
+    <string name="tab_add_production">បន្ថែមផលិតកម្ម</string>
+    <string name="tab_add_music_type">ប្រភេទបទចំរៀង</string>
+    <string name="tab_add_singer_type">ប្រភេទអ្នកចំរៀង</string>
+    <string name="tab_add_singer">អ្នកចំរៀង</string>
     <string name="browse_music">ស្វែងរកបទចំរៀង</string>
-
 
 
     <string name="music_title">ចំណងជើង</string>
     <string name="album">អាល់ប៊ុម</string>
     <string name="singer">អ្នកចំរៀង</string>
     <string name="duration">រយៈពេល</string>
-
-
+    <string name="production_title">ឈ្មោះផលិតកម្ម</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
