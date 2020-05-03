@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragment.ProductionFragment"
     android:orientation="vertical">
-
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,8 +36,8 @@
                 android:backgroundTintMode="screen"/>
         </RelativeLayout>
     </FrameLayout>
-
     <EditText
+        android:id="@+id/edtProductionName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/production_title"
@@ -51,12 +50,12 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"/>
-
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewUploadProduction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="@dimen/buttonCornerRadius"
         app:cardBackgroundColor="@color/colorPrimary"
         android:innerRadius="0dp"
         android:shape="ring"
@@ -77,12 +76,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/browse_music"
+                android:text="@string/save_production"
                 android:textSize="@dimen/default_font_14_sp"
                 android:textColor="@color/white"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-
 </LinearLayout>

@@ -1,50 +1,34 @@
 {
   "project_info": {
-    "project_number": "988327505897",
-    "firebase_url": "https://khmermusiclibraryuploader.firebaseio.com",
-    "project_id": "khmermusiclibraryuploader",
-    "storage_bucket": "khmermusiclibraryuploader.appspot.com"
+    "project_number": "726855172128",
+    "firebase_url": "https://khmer-music-library.firebaseio.com",
+    "project_id": "khmer-music-library",
+    "storage_bucket": "khmer-music-library.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:988327505897:android:5267af58af3f83f2f1a578",
+        "mobilesdk_app_id": "1:726855172128:android:a271caec96ba62c6777c45",
         "android_client_info": {
           "package_name": "com.example.khmer_music_library_uploader"
         }
       },
       "oauth_client": [
         {
-          "client_id": "988327505897-ijv2nkjt9d86uf18fscoh29njjad175g.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.khmer_music_library_uploader",
-            "certificate_hash": "a16e76eab377d42217fe7802979aacf65d1bbef6"
-          }
-        },
-        {
-          "client_id": "988327505897-t8vbtei1mot097t26tjlm7nnefou4713.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.khmer_music_library_uploader",
-            "certificate_hash": "5b919a9423cea142eb1608928dd4e974c2d26ad0"
-          }
-        },
-        {
-          "client_id": "988327505897-lo828prdno6co74p1heduta44gqqqkmc.apps.googleusercontent.com",
+          "client_id": "726855172128-oa0d1toa7p98vpvkq9hfbrtnd9b97qrj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAYBJaVwvRlHgJ21jGRSjVACQcorERofSA"
+          "current_key": "AIzaSyBCyCsV-gAPZ9vlhGqcFGBlZSsE7RpaY_A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "988327505897-lo828prdno6co74p1heduta44gqqqkmc.apps.googleusercontent.com",
+              "client_id": "726855172128-oa0d1toa7p98vpvkq9hfbrtnd9b97qrj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

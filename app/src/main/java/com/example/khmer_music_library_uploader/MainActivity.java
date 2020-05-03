@@ -1,26 +1,23 @@
 package com.example.khmer_music_library_uploader;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.khmer_music_library_uploader.fragment.AlbumUploadFragment;
 import com.example.khmer_music_library_uploader.fragment.MusicTypeFragment;
+import com.example.khmer_music_library_uploader.fragment.MusicUploadFragment;
 import com.example.khmer_music_library_uploader.fragment.ProductionFragment;
 import com.example.khmer_music_library_uploader.fragment.SingerFragment;
 import com.example.khmer_music_library_uploader.fragment.SingerTypeFragment;
 import com.example.khmer_music_library_uploader.fragment.SongUploadFragment;
 import com.google.android.material.tabs.TabLayout;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private void  setUpviewPager()
     {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),1);
-        adapter.addFragment(new SongUploadFragment(),getResources().getText(R.string.tab_add_song).toString());
+        adapter.addFragment(new MusicUploadFragment(),getResources().getText(R.string.tab_add_song).toString());
         adapter.addFragment(new ProductionFragment(),getResources().getText(R.string.tab_add_production).toString());
         adapter.addFragment(new AlbumUploadFragment(),getResources().getText(R.string.tab_add_album).toString());
         adapter.addFragment(new MusicTypeFragment(),getResources().getText(R.string.tab_add_music_type).toString());
