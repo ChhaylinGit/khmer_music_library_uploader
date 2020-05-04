@@ -195,7 +195,7 @@ public class ProductionFragment extends Fragment {
                         @Override
                         public void onSuccess(Uri uri) {
                             String url = uri.toString();
-                            Production production = new Production(edtProductionName.getText().toString(),url);
+                            Production production = new Production("",edtProductionName.getText().toString(),url);
                             String productionID = databaseReference.push().getKey();
                             databaseReference.child(productionID).setValue(production);
                             progressDialog.dismiss();
