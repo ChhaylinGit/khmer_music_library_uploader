@@ -9,6 +9,7 @@
     <color name="gray">#9AACABAB</color>
 
     <color name="border_stroke">#58707070</color>
+    <color name="red">#f44336</color>
 
 
 </resources>

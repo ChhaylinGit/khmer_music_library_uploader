@@ -18,11 +18,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.OpenableColumns;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khmer_music_library_uploader.R;
@@ -46,14 +48,16 @@ import static android.app.Activity.RESULT_OK;
  */
 public class ProductionFragment extends Fragment {
 
-     CardView cardViewUploadProduction;
-     CircularImageView imageProduction;
-     FloatingActionButton browseImageProduction;
-     Uri filePath;
-     static final int RESULT_LOAD_IMAGE = 1;
-     StorageReference storageReference;
-     DatabaseReference databaseReference;
-     EditText edtProductionName;
+    private CardView cardViewUploadProduction;
+    private CircularImageView imageProduction;
+    private FloatingActionButton browseImageProduction;
+    private Uri filePath;
+    private static final int RESULT_LOAD_IMAGE = 1;
+    private StorageReference storageReference;
+    private DatabaseReference databaseReference;
+    private EditText edtProductionName;
+    private boolean isImageSelected = false;
+    private TextView textViewShowErrorImage;
 
 
     public ProductionFragment() {
@@ -83,19 +87,26 @@ public class ProductionFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             filePath = data.getData();
-            Toast.makeText(getActivity(), filePath.toString()+"."+getFileExtension(filePath), Toast.LENGTH_LONG).show();
             imageProduction.setImageURI(filePath);
             imageProduction.invalidate();
+            this.isImageSelected = true;
+            textViewShowErrorImage.setVisibility(View.GONE);
         }
+    }
+
+    private void initView(View view)
+    {
+        imageProduction= view.findViewById(R.id.imageProduction);
+        cardViewUploadProduction = view.findViewById(R.id.cardViewUploadProduction);
+        browseImageProduction = view.findViewById(R.id.browseImageProduction);
+        edtProductionName = view.findViewById(R.id.edtProductionName);
+        textViewShowErrorImage = view.findViewById(R.id.textViewShowErrorImage);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_production, container, false);
-        imageProduction= view.findViewById(R.id.imageProduction);
-        cardViewUploadProduction = view.findViewById(R.id.cardViewUploadProduction);
-        browseImageProduction = view.findViewById(R.id.browseImageProduction);
-        edtProductionName = view.findViewById(R.id.edtProductionName);
+        initView(view);
         browseImageProduction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +116,17 @@ public class ProductionFragment extends Fragment {
         cardViewUploadProduction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadProduction();
+                if(!isImageSelected)
+                {
+                    textViewShowErrorImage.setVisibility(View.VISIBLE);
+                }
+                else if(TextUtils.isEmpty(edtProductionName.getText()))
+                {
+                    edtProductionName.setError(getResources().getString(R.string.please_input_production_title));
+                }else
+                    {
+                        uploadProduction();
+                    }
             }
         });
         return  view;
@@ -115,7 +136,7 @@ public class ProductionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         storageReference = FirebaseStorage.getInstance().getReference();
-        databaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+        databaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_PRODUCTION);
     }
 
     private String getFileName(Uri uri)
@@ -152,14 +173,21 @@ public class ProductionFragment extends Fragment {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
+    private void reSetToDefault()
+    {
+        imageProduction.setImageDrawable(getResources().getDrawable(R.drawable.default_image));
+        edtProductionName.setText("");
+        this.isImageSelected=false;
+    }
+
     public void uploadProduction()
     {
         if(filePath != null)
         {
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle("uploading...");
+            progressDialog.setTitle("Please wait...");
             progressDialog.show();
-            final StorageReference str = storageReference.child(Constants.STORAGE_PATH_UPLOADS+System.currentTimeMillis()+"."+getFileExtension(filePath));
+            final StorageReference str = storageReference.child(Constants.STORAGE_PATH_PRODUCTION+edtProductionName.getText().toString()+"_"+System.currentTimeMillis()+"."+getFileExtension(filePath));
             str.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -171,7 +199,7 @@ public class ProductionFragment extends Fragment {
                             String productionID = databaseReference.push().getKey();
                             databaseReference.child(productionID).setValue(production);
                             progressDialog.dismiss();
-                            Toast.makeText(getActivity(), "FileUploaded-"+url, Toast.LENGTH_SHORT).show();
+                            reSetToDefault();
                         }
                     });
                 }
@@ -185,7 +213,7 @@ public class ProductionFragment extends Fragment {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                     double progress = (100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-                    progressDialog.setMessage("upload"+(int)progress+"%.....");
+                    progressDialog.setMessage("Uploading.... "+(int)progress+"/100%"); //Uploading....50/100%
                 }
             });
         }

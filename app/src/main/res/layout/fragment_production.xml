@@ -36,6 +36,14 @@
                 android:backgroundTintMode="screen"/>
         </RelativeLayout>
     </FrameLayout>
+    <TextView
+        android:id="@+id/textViewShowErrorImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/please_select_image"
+        android:layout_gravity="center"
+        android:textColor="@color/red"
+        android:visibility="gone"/>
     <EditText
         android:id="@+id/edtProductionName"
         android:layout_width="match_parent"
