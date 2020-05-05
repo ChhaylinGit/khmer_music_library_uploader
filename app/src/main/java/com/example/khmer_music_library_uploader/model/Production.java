@@ -1,22 +1,13 @@
 package com.example.khmer_music_library_uploader.model;
 
 public class Production {
-    private String productionId;
     private String productionName;
     private String url;
 
-    public Production(String productionId, String productionName, String url) {
-        this.productionId = productionId;
+    public Production(String productionName, String url) {
+
         this.productionName = productionName;
         this.url = url;
-    }
-
-    public String getProductionId() {
-        return productionId;
-    }
-
-    public void setProductionId(String productionId) {
-        this.productionId = productionId;
     }
 
     public String getProductionName() {

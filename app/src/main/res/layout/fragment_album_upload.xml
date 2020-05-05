@@ -15,17 +15,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
             <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/imageProduction"
+                android:id="@+id/imageAlbum"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:src="@drawable/default_image"
                 android:layout_gravity="center"/>
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/browseImageProduction"
+                android:id="@+id/browseImageAlbum"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_alignRight="@+id/imageProduction"
-                android:layout_alignBottom="@id/imageProduction"
+                android:layout_alignRight="@+id/imageAlbum"
+                android:layout_alignBottom="@id/imageAlbum"
                 android:layout_marginBottom="15dp"
                 android:layout_marginRight="15dp"
                 android:src="@drawable/ic_camera_alt_black_24dp"
@@ -56,10 +56,10 @@
         android:layout_marginTop="20dp">
     </Spinner>
     <EditText
-        android:id="@+id/edtProductionName"
+        android:id="@+id/edtAlbumName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/production_title"
+        android:hint="@string/album_title"
         android:fontFamily="@font/khmer_os_battambang"
         android:background="@drawable/share_rounded_corner_with_border"
         android:paddingLeft="10dp"
@@ -70,7 +70,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"/>
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewUploadProduction"
+        android:id="@+id/cardViewUploadAlbum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
@@ -95,7 +95,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save_production"
+                android:text="@string/save_album"
                 android:textSize="@dimen/default_font_14_sp"
                 android:textColor="@color/white"
                 android:layout_centerVertical="true"/>

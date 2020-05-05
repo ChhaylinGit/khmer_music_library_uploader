@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.example.khmer_music_library_uploader.R;
 import com.example.khmer_music_library_uploader.model.Constants;
 import com.example.khmer_music_library_uploader.model.Production;
+import com.example.khmer_music_library_uploader.model.Setting;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -52,7 +53,6 @@ public class ProductionFragment extends Fragment {
     private CircularImageView imageProduction;
     private FloatingActionButton browseImageProduction;
     private Uri filePath;
-    private static final int RESULT_LOAD_IMAGE = 1;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     private EditText edtProductionName;
@@ -69,7 +69,7 @@ public class ProductionFragment extends Fragment {
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, RESULT_LOAD_IMAGE);
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Constants.RESULT_LOAD_IMAGE);
             return;
         }
     }
@@ -79,13 +79,14 @@ public class ProductionFragment extends Fragment {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_PICK);
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), RESULT_LOAD_IMAGE);
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), Constants.RESULT_LOAD_IMAGE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+        Toast.makeText(getActivity(), Constants.RESULT_LOAD_IMAGE+"", Toast.LENGTH_SHORT).show();
+        if (requestCode == Constants.RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             filePath = data.getData();
             imageProduction.setImageURI(filePath);
             imageProduction.invalidate();
@@ -166,12 +167,7 @@ public class ProductionFragment extends Fragment {
         return result;
     }
 
-    public String getFileExtension(Uri uri)
-    {
-        ContentResolver contentResolver = getActivity().getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
+
 
     private void reSetToDefault()
     {
@@ -187,7 +183,7 @@ public class ProductionFragment extends Fragment {
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle("Please wait...");
             progressDialog.show();
-            final StorageReference str = storageReference.child(Constants.STORAGE_PATH_PRODUCTION+edtProductionName.getText().toString()+"_"+System.currentTimeMillis()+"."+getFileExtension(filePath));
+            final StorageReference str = storageReference.child(Constants.STORAGE_PATH_PRODUCTION+edtProductionName.getText().toString()+"_"+System.currentTimeMillis()+"."+Setting.getFileExtension(getActivity(),filePath));
             str.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

@@ -16,12 +16,16 @@
     <string name="production_title">ឈ្មោះផលិតកម្ម</string>
     <string name="album_title">ឈ្មោះអាល់ប៊ុម</string>
     <string name="save_production">រក្សាទុកផលិតកម្ម</string>
+    <string name="save_album">រក្សាទុកអាល់ប៊ុម</string>
 
     <!--Todo: Show Error Caption for EditText-->
     <string name="please_input_production_title">សូមបញ្ចូលផលិតកម្ម!</string>
 
     <!--Todo: Show Error Caption for ImageView-->
     <string name="please_select_image">សូមជ្រើសរើសរូបភាព!</string>
+
+    <!--Todo: Show Error Caption for Spinner-->
+    <string name="please_select_production">----ជ្រើសរើសផលិតកម្ម----</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
