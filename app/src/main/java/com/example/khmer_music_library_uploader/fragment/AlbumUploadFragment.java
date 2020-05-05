@@ -31,7 +31,7 @@ public class AlbumUploadFragment extends Fragment {
 
     private Spinner spinnerProduction;
     private DatabaseReference databaseReference;
-    private Production production;
+
 
     public AlbumUploadFragment() {
         // Required empty public constructor

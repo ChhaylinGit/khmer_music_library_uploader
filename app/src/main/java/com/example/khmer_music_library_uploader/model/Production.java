@@ -5,14 +5,10 @@ public class Production {
     private String productionName;
     private String url;
 
-    public Production(String productionName, String url) {
-        this.productionName = productionName;
-        this.url = url;
-    }
-
-    public Production(String productionId, String productionName,String str) {
+    public Production(String productionId, String productionName, String url) {
         this.productionId = productionId;
         this.productionName = productionName;
+        this.url = url;
     }
 
     public String getProductionId() {
