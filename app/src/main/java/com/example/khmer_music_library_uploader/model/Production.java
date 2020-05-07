@@ -1,26 +1,13 @@
 package com.example.khmer_music_library_uploader.model;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
 public class Production {
     private String productionName;
-    private String imageurl;
-    private Context context;
-    private DatabaseReference databaseReference;
-    private StorageReference storageReference;
-
+    private String url;
 
     public Production(String productionName, String url) {
+
         this.productionName = productionName;
-        this.imageurl = url;
+        this.url = url;
     }
 
     public String getProductionName() {
@@ -31,13 +18,11 @@ public class Production {
         this.productionName = productionName;
     }
 
-    public String getImageUrl() {
-        return imageurl;
+    public String getUrl() {
+        return url;
     }
 
     public void setUrl(String url) {
-        this.imageurl = url;
+        this.url = url;
     }
-
-
 }
