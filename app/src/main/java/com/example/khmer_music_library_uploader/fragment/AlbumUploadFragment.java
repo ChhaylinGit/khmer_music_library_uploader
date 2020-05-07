@@ -116,10 +116,9 @@ public class AlbumUploadFragment extends Fragment {
                         public void onSuccess(Uri uri) {
                             String url = uri.toString();
                             Log.e("xxxxxxxx",productionID+"\n"+url);
-                            Album production = new Album(editTextAlbumName.getText().toString(),productionID,url);
+                            Album production = new Album(editTextAlbumName.getText().toString(),url);
                             String albumid = dbUploadAlbum.push().getKey();
-                            Log.e("xxxxxxxxKey: ",albumid);
-                            dbUploadAlbum.child(albumid).setValue(production);
+                            dbUploadAlbum.child(productionID).child(albumid).setValue(production);
                             progressDialog.dismiss();
                         }
                     });
