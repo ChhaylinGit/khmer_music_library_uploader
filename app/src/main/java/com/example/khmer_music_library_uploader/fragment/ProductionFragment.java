@@ -117,16 +117,20 @@ public class ProductionFragment extends Fragment {
         cardViewUploadProduction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isImageSelected)
-                {
-                    textViewShowErrorImage.setVisibility(View.VISIBLE);
-                }
-                else if(TextUtils.isEmpty(edtProductionName.getText()))
+                if(TextUtils.isEmpty(edtProductionName.getText()))
                 {
                     edtProductionName.setError(getResources().getString(R.string.please_input_production_title));
                 }else
                     {
-                        uploadProduction();
+                        if(!isImageSelected)
+                        {
+                            Toast.makeText(getActivity(), "No Image", Toast.LENGTH_SHORT).show();
+                            uploadProduction();
+                        }else
+                            {
+                                Toast.makeText(getActivity(), "With Image", Toast.LENGTH_SHORT).show();
+                                uploadProductionWithImage();
+                            }
                     }
             }
         });
@@ -176,7 +180,7 @@ public class ProductionFragment extends Fragment {
         this.isImageSelected=false;
     }
 
-    public void uploadProduction()
+    public void uploadProductionWithImage()
     {
         if(filePath != null)
         {
@@ -213,5 +217,26 @@ public class ProductionFragment extends Fragment {
                 }
             });
         }
+    }
+
+    public void uploadProduction()
+    {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Please wait...");
+        progressDialog.show();
+        Production production = new Production(edtProductionName.getText().toString(),"");
+        String productionID = databaseReference.push().getKey();
+        databaseReference.child(productionID).setValue(production).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                progressDialog.dismiss();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

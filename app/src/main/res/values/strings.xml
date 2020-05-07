@@ -20,12 +20,14 @@
 
     <!--Todo: Show Error Caption for EditText-->
     <string name="please_input_production_title">សូមបញ្ចូលផលិតកម្ម!</string>
+    <string name="please_input_album_title">សូមបញ្ចូលអាល់ប៊ុម!</string>
 
     <!--Todo: Show Error Caption for ImageView-->
     <string name="please_select_image">សូមជ្រើសរើសរូបភាព!</string>
 
     <!--Todo: Show Error Caption for Spinner-->
-    <string name="please_select_production">----ជ្រើសរើសផលិតកម្ម----</string>
+    <string name="select_production">----ជ្រើសរើសផលិតកម្ម----</string>
+    <string name="please_select_production">សូមជ្រើសរើសផលិតកម្ម!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

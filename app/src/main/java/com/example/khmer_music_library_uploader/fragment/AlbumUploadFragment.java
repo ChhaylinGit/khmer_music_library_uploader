@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,7 +94,20 @@ public class AlbumUploadFragment extends Fragment {
         cardViewUploadAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadAlbum();
+                if(productionID.equals("0"))
+                {
+                    TextView errorText = (TextView)spinnerProduction.getSelectedView();
+                    errorText.setError("");
+                    errorText.setTextColor(Color.RED);
+                    errorText.setText(getResources().getString(R.string.please_select_production));
+                }
+                else if(TextUtils.isEmpty(editTextAlbumName.getText().toString().trim()))
+                {
+                    editTextAlbumName.setError(getResources().getString(R.string.please_input_album_title));
+                }
+                else{
+                    uploadAlbum();
+                }
             }
         });
         return view;
@@ -162,7 +176,7 @@ public class AlbumUploadFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productionList.clear();
-                productionList.add(new StringWithTag(getResources().getString(R.string.please_select_production),"0"));
+                productionList.add(new StringWithTag(getResources().getString(R.string.select_production),"0"));
                 for (DataSnapshot data : dataSnapshot.getChildren())
                 {
                     String productionId = data.getKey();
