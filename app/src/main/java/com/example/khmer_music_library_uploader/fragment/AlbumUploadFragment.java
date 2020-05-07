@@ -1,5 +1,8 @@
 package com.example.khmer_music_library_uploader.fragment;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -7,11 +10,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +63,7 @@ public class AlbumUploadFragment extends Fragment {
     private TextView textViewShowErrorImage;
     private Uri filePath;
     private String productionID;
+    private AlertDialog.Builder builder ;
 
     public AlbumUploadFragment() {
         // Required empty public constructor
@@ -83,7 +89,7 @@ public class AlbumUploadFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_album_upload, container, false);
+        final View view = inflater.inflate(R.layout.fragment_album_upload, container, false);
         initView(view);
         browseImageAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +114,30 @@ public class AlbumUploadFragment extends Fragment {
                 else{
                     uploadAlbum();
                 }
+            }
+        });
+        imageViewAlbum.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(getActivity(),imageViewAlbum);
+                popupMenu.getMenuInflater().inflate(R.menu.modify_image_menu,popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId())
+                        {
+                            case R.id.menu_remove_image:
+                                removeImage();
+                                break;
+                            case R.id.menu_new_image:
+                                browseImage();
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
+                return true;
             }
         });
         return view;
@@ -153,6 +183,34 @@ public class AlbumUploadFragment extends Fragment {
         }
     }
 
+    @SuppressLint("RestrictedApi")
+    private void removeImage()
+    {
+//        imageViewAlbum.setImageDrawable(getResources().getDrawable(R.drawable.default_image));
+//        browseImageAlbum.setVisibility(View.VISIBLE);
+//        isImageSelected=false;
+//        filePath = null;
+        builder.setMessage("Do you want to upload")
+                .setCancelable(false)
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alert = builder.create();
+        //Setting the title manually
+        alert.setTitle("AlertDialogExample");
+        alert.show();
+    }
+
+
+    @SuppressLint("RestrictedApi")
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -162,6 +220,7 @@ public class AlbumUploadFragment extends Fragment {
             imageViewAlbum.invalidate();
             this.isImageSelected = true;
             textViewShowErrorImage.setVisibility(View.GONE);
+            browseImageAlbum.setVisibility(View.GONE);
         }
     }
 
@@ -169,6 +228,7 @@ public class AlbumUploadFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final List<StringWithTag> productionList=new ArrayList<>();
+        builder = new AlertDialog.Builder(getActivity());
         storUploadAlbum = FirebaseStorage.getInstance().getReference();
         dbUploadAlbum = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_ALBUM);
         dbSpinner = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_PRODUCTION);

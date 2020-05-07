@@ -31,4 +31,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Menu -->
+    <string name="menu_remove_image">លុបចេញ</string>
+    <string name="menu_renew_image">ប្តូររូបថ្មី</string>
 </resources>
