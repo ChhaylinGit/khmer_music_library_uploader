@@ -115,14 +115,11 @@ public class AlbumUploadFragment extends Fragment {
                             case R.id.menu_remove_image:
                                 removeImage();
                                 break;
-                            case R.id.menu_new_image:
-                                browseImage();
-                                break;
                         }
                         return true;
                     }
                 });
-                popupMenu.show();
+                if(isImageSelected){popupMenu.show();}
                 return true;
             }
         });
@@ -172,27 +169,10 @@ public class AlbumUploadFragment extends Fragment {
     @SuppressLint("RestrictedApi")
     private void removeImage()
     {
-//        imageViewAlbum.setImageDrawable(getResources().getDrawable(R.drawable.default_image));
-//        browseImageAlbum.setVisibility(View.VISIBLE);
-//        isImageSelected=false;
-//        filePath = null;
-        builder.setMessage("Do you want to upload")
-                .setCancelable(false)
-                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        AlertDialog alert = builder.create();
-        //Setting the title manually
-        alert.setTitle("AlertDialogExample");
-        alert.show();
+        imageViewAlbum.setImageDrawable(getResources().getDrawable(R.drawable.default_image));
+        browseImageAlbum.setVisibility(View.VISIBLE);
+        isImageSelected=false;
+        filePath = null;
     }
 
 
