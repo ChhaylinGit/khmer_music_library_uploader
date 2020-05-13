@@ -1,6 +1,7 @@
 package com.example.khmer_music_library_uploader.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -20,10 +21,12 @@ import androidx.fragment.app.Fragment;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -130,7 +133,37 @@ public class ProductionFragment extends Fragment {
                     }
             }
         });
+        imageProduction.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(getActivity(),imageProduction);
+                popupMenu.getMenuInflater().inflate(R.menu.modify_image_menu,popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId())
+                        {
+                            case R.id.menu_remove_image:
+                                removeImage();
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                if(isImageSelected){popupMenu.show();}
+                return true;
+            }
+        });
         return  view;
+    }
+
+    @SuppressLint("RestrictedApi")
+    private void removeImage()
+    {
+        imageProduction.setImageDrawable(getResources().getDrawable(R.drawable.default_image));
+        browseImageProduction.setVisibility(View.VISIBLE);
+        isImageSelected=false;
+        filePath = null;
     }
 
     @Override
