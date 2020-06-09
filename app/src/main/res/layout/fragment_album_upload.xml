@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner"
+        android:paddingRight="30dp"
         android:paddingBottom="@dimen/spinnerPaddingBottom"
         android:paddingTop="@dimen/spinnerPaddingTop"
         android:layout_marginLeft="20dp"
@@ -63,6 +64,7 @@
         android:fontFamily="@font/khmer_os_battambang"
         android:background="@drawable/share_rounded_corner_with_border"
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textSize="@dimen/default_font_14_sp"
@@ -95,7 +97,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save_album"
+                android:text="@string/save"
                 android:textSize="@dimen/default_font_14_sp"
                 android:textColor="@color/white"
                 android:layout_centerVertical="true"/>

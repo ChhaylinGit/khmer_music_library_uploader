@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -86,6 +87,25 @@ public class AlbumUploadFragment extends Fragment {
         startActivityForResult(Intent.createChooser(intent, "Select Image"), Constants.RESULT_LOAD_IMAGE);
     }
 
+    private boolean empty()
+    {
+        boolean result=false;
+        if(productionID.equals("0"))
+        {
+            TextView errorText = (TextView)spinnerProduction.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText(getResources().getString(R.string.please_input_production_title));//changes the selected item text to this
+            result = true;
+        }
+        if(TextUtils.isEmpty(editTextAlbumName.getText().toString()))
+        {
+            editTextAlbumName.setError(getResources().getString(R.string.please_input_album_title));
+            result = true;
+        }
+        return result;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_album_upload, container, false);
@@ -99,7 +119,15 @@ public class AlbumUploadFragment extends Fragment {
         cardViewUploadAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadAlbum();
+                if(!empty())
+                {
+                    if(!isImageSelected)
+                    {
+                        uploadAlbum();
+                    }else{
+                        uploadAlbumWithImage();
+                    }
+                }
             }
         });
         imageViewAlbum.setOnLongClickListener(new View.OnLongClickListener() {
@@ -126,8 +154,15 @@ public class AlbumUploadFragment extends Fragment {
         return view;
     }
 
+    private void uploadSinger()
+    {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Please wait...");
+        progressDialog.show();
 
-    private void uploadAlbum()
+    }
+
+    private void uploadAlbumWithImage()
     {
         if(filePath != null)
         {
@@ -166,17 +201,36 @@ public class AlbumUploadFragment extends Fragment {
         }
     }
 
-    @SuppressLint("RestrictedApi")
+    private void uploadAlbum()
+    {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Please wait...");
+        progressDialog.show();
+        Album production = new Album(editTextAlbumName.getText().toString(),"");
+        String albumid = dbUploadAlbum.push().getKey();
+        dbUploadAlbum.child(productionID).child(albumid).setValue(production).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                progressDialog.dismiss();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void removeImage()
     {
         imageViewAlbum.setImageDrawable(getResources().getDrawable(R.drawable.default_image));
-        browseImageAlbum.setVisibility(View.VISIBLE);
+        browseImageAlbum.show();
         isImageSelected=false;
         filePath = null;
     }
 
 
-    @SuppressLint("RestrictedApi")
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -186,18 +240,13 @@ public class AlbumUploadFragment extends Fragment {
             imageViewAlbum.invalidate();
             this.isImageSelected = true;
             textViewShowErrorImage.setVisibility(View.GONE);
-            browseImageAlbum.setVisibility(View.GONE);
+            browseImageAlbum.hide();
         }
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private void loadSpinner()
+    {
         final List<StringWithTag> productionList=new ArrayList<>();
-        builder = new AlertDialog.Builder(getActivity());
-        storUploadAlbum = FirebaseStorage.getInstance().getReference();
-        dbUploadAlbum = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_ALBUM);
-        dbSpinner = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_PRODUCTION);
         dbSpinner.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -252,5 +301,15 @@ public class AlbumUploadFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        builder = new AlertDialog.Builder(getActivity());
+        storUploadAlbum = FirebaseStorage.getInstance().getReference();
+        dbUploadAlbum = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_ALBUM);
+        dbSpinner = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_PRODUCTION);
+        loadSpinner();
     }
 }

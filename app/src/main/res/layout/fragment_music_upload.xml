@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewBrowseMusic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
@@ -32,31 +33,45 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save_production"
+                android:text="@string/browse_music"
                 android:textSize="@dimen/default_font_14_sp"
                 android:textColor="@color/white"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:id="@+id/textViewShowErrorMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:fontFamily="@font/khmer_os_battambang"
+        android:textSize="@dimen/default_font_14_sp"
+        android:visibility="gone"
+        android:text="សូមជ្រើសរើសបទចំរៀង"/>
+
     <Spinner
-        android:id="@+id/spinnerAlbum"
+        android:id="@+id/spinnerProduction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner"
+        android:paddingRight="30dp"
         android:paddingBottom="@dimen/spinnerPaddingBottom"
         android:paddingTop="@dimen/spinnerPaddingTop"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/khmer_os_battambang"
         android:textSize="@dimen/default_font_14_sp">
     </Spinner>
 
     <Spinner
+        android:id="@+id/spinnerAlbum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner"
+        android:paddingRight="30dp"
         android:paddingBottom="@dimen/spinnerPaddingBottom"
         android:paddingTop="@dimen/spinnerPaddingTop"
         android:layout_marginLeft="20dp"
@@ -65,9 +80,11 @@
     </Spinner>
 
     <Spinner
+        android:id="@+id/spinnerSinger"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner"
+        android:paddingRight="30dp"
         android:paddingBottom="@dimen/spinnerPaddingBottom"
         android:paddingTop="@dimen/spinnerPaddingTop"
         android:layout_marginLeft="20dp"
@@ -76,9 +93,11 @@
     </Spinner>
 
     <Spinner
+        android:id="@+id/spinnerMusicType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner"
+        android:paddingRight="30dp"
         android:paddingBottom="@dimen/spinnerPaddingBottom"
         android:paddingTop="@dimen/spinnerPaddingTop"
         android:layout_marginLeft="20dp"
@@ -87,11 +106,13 @@
     </Spinner>
 
     <EditText
+        android:id="@+id/edtMusicTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/production_title"
+        android:hint="@string/music_title"
         android:fontFamily="@font/khmer_os_battambang"
         android:background="@drawable/share_rounded_corner_with_border"
+        android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -101,25 +122,13 @@
         android:textSize="@dimen/default_font_14_sp"/>
 
     <EditText
+        android:id="@+id/edtMusicDuration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/production_title"
+        android:hint="@string/duration"
         android:fontFamily="@font/khmer_os_battambang"
         android:background="@drawable/share_rounded_corner_with_border"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:textSize="@dimen/default_font_14_sp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/production_title"
-        android:fontFamily="@font/khmer_os_battambang"
-        android:background="@drawable/share_rounded_corner_with_border"
+        android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -129,6 +138,7 @@
         android:textSize="@dimen/default_font_14_sp"/>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSaveMusic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
@@ -153,7 +163,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save_production"
+                android:text="@string/save"
                 android:textSize="@dimen/default_font_14_sp"
                 android:textColor="@color/white"
                 android:layout_centerVertical="true"/>

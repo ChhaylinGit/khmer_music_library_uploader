@@ -10,22 +10,45 @@
 
 
     <string name="music_title">ចំណងជើង</string>
+    <string name="music_type">ប្រភេទបទចំម្រៀង</string>
     <string name="album">អាល់ប៊ុម</string>
     <string name="singer">អ្នកចំរៀង</string>
+    <string name="singertype">ប្រភេទអ្នកចំម្រៀង</string>
     <string name="duration">រយៈពេល</string>
     <string name="production_title">ឈ្មោះផលិតកម្ម</string>
     <string name="album_title">ឈ្មោះអាល់ប៊ុម</string>
     <string name="save_production">រក្សាទុកផលិតកម្ម</string>
-    <string name="save_album">រក្សាទុកអាល់ប៊ុម</string>
+    <string name="save">រក្សាទុក</string>
+    <string name="singer_name">ឈ្មោះអ្នកចំម្រៀង</string>
+    <string name="male">ប្រុស</string>
+    <string name="female">ស្រី</string>
+
 
     <!--Todo: Show Error Caption for EditText-->
     <string name="please_input_production_title">សូមបញ្ចូលផលិតកម្ម!</string>
+    <string name="please_input_album_title">សូមបញ្ចូលឈ្មោះអាល់ប៊ុម!</string>
+    <string name="please_input_musictype">សូមបញ្ចូលប្រភេទបទចម្រៀង!</string>
+    <string name="please_input_singertype">សូមបញ្ចូលប្រភេទអ្នកចំម្រៀង!</string>
+    <string name="please_input_music_title">សូមបញ្ចូលឈ្មោះបទចំរៀង!</string>
+    <string name="please_input_music_duration">សូមបញ្ចូលរយៈពេលបទចំរៀង!</string>
+
 
     <!--Todo: Show Error Caption for ImageView-->
     <string name="please_select_image">សូមជ្រើសរើសរូបភាព!</string>
 
     <!--Todo: Show Error Caption for Spinner-->
     <string name="please_select_production">----ជ្រើសរើសផលិតកម្ម----</string>
+    <string name="please_select_singer_type">----ជ្រើសរើសប្រភេទអ្នកចំរៀង----</string>
+    <string name="please_select_gender">----ជ្រើសរើសភេទ----</string>
+    <string name="please_select_album">----ជ្រើសរើសអាល់ប៊ុម----</string>
+    <string name="please_select_singer">----ជ្រើសរើសអ្នកចំរៀង----</string>
+    <string name="please_select_music_type">----ជ្រើសរើសប្រភេទបទចំរៀង----</string>
+
+    <!--Todo: Show Error Caption for Spinner-->
+    <string name="select_production">សូមជ្រើសរើសផលិតកម្ម</string>
+    <string name="select_album">សូមជ្រើសរើសអាល់ប៉ុម</string>
+    <string name="select_singer">សូមជ្រើសរើសអ្នកចំរៀង</string>
+    <string name="select_music_type">សូមជ្រើសរើសប្រភេទបទចំរៀង</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

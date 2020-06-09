@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,12 +49,13 @@ import static android.app.Activity.RESULT_OK;
  */
 public class SongUploadFragment extends Fragment {
 
+
     private CardView btnBrowse;
     private ListView listView;
     private Spinner spinner;
     private ImageView albumPicture;
     private ProgressBar progressBar;
-    private StorageTask storageTask;
+    private StorageTask mUploadTask;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     private MediaMetadataRetriever mediaMetadataRetriever;

@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,7 +45,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
-
 import static android.app.Activity.RESULT_OK;
 
 /**
@@ -84,7 +84,6 @@ public class ProductionFragment extends Fragment {
         startActivityForResult(Intent.createChooser(intent, "Select Image"), Constants.RESULT_LOAD_IMAGE);
     }
 
-    @SuppressLint("RestrictedApi")
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -94,7 +93,7 @@ public class ProductionFragment extends Fragment {
             imageProduction.setImageURI(filePath);
             imageProduction.invalidate();
             textViewShowErrorImage.setVisibility(View.GONE);
-            browseImageProduction.setVisibility(View.GONE);
+            browseImageProduction.hide();
             this.isImageSelected = true;
         }
     }
@@ -120,15 +119,22 @@ public class ProductionFragment extends Fragment {
         cardViewUploadProduction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isImageSelected) {
-                    textViewShowErrorImage.setVisibility(View.VISIBLE);
-                } else if (TextUtils.isEmpty(edtProductionName.getText())) {
+                if(TextUtils.isEmpty(edtProductionName.getText().toString()))
+                {
                     edtProductionName.setError(getResources().getString(R.string.please_input_production_title));
-                } else {
-                    uploadProduction();
-                }
+                }else
+                    {
+                        if(!isImageSelected)
+                        {
+                            uploadProduction();
+                        }else{
+                            uploadProductionWithImage();
+                        }
+                    }
             }
         });
+
+
         imageProduction.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -150,7 +156,7 @@ public class ProductionFragment extends Fragment {
                 return true;
             }
         });
-<<<<<<< HEAD
+
         imageProduction.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -172,17 +178,14 @@ public class ProductionFragment extends Fragment {
                 return true;
             }
         });
-        return  view;
-=======
         return view;
->>>>>>> 4624a9813f7eb12a17919bdd4cc180d6e302bd04
     }
 
-    @SuppressLint("RestrictedApi")
+
     private void removeImage()
     {
         imageProduction.setImageDrawable(getResources().getDrawable(R.drawable.default_image));
-        browseImageProduction.setVisibility(View.VISIBLE);
+        browseImageProduction.show();
         isImageSelected=false;
         filePath = null;
     }
@@ -221,18 +224,32 @@ public class ProductionFragment extends Fragment {
         imageProduction.setImageDrawable(getResources().getDrawable(R.drawable.default_image));
         edtProductionName.setText("");
         this.isImageSelected = false;
+        browseImageProduction.show();
     }
 
-    @SuppressLint("RestrictedApi")
-    private void removeImage()
+
+    private void uploadProduction()
     {
-        imageProduction.setImageDrawable(getResources().getDrawable(R.drawable.default_image));
-        browseImageProduction.setVisibility(View.VISIBLE);
-        isImageSelected=false;
-        filePath = null;
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Please wait...");
+        progressDialog.show();
+        Production production = new Production(edtProductionName.getText().toString(), "");
+        String productionID = databaseReference.push().getKey();
+        databaseReference.child(productionID).setValue(production).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                progressDialog.dismiss();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    public void uploadProduction() {
+    public void uploadProductionWithImage() {
         if (filePath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle("Please wait...");
